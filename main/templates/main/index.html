@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Calculator</title>
+</head>
+<body>
+    <h2>Simple Calculator</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="number" name="num1" required step="any" placeholder="Enter number 1"><br><br>
+        <input type="number" name="num2" required step="any" placeholder="Enter number 2"><br><br>
+
+        <select name="operation">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+        </select><br><br>
+
+        <input type="submit" value="Calculate">
+    </form>
+
+    {% if result != "" %}
+        <h3>Result: {{ result }}</h3>
+    {% endif %}
+</body>
+</html>
