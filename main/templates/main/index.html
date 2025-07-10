@@ -1,27 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Django Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calculator-container {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+        }
+        h2 {
+            color: #5a189a;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+        input[type="number"] {
+            width: 85%;
+            padding: 0.7rem;
+            margin: 0.5rem 0;
+            border: 1px solid #bdbdbd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+        input[type="number"]:focus {
+            border: 1.5px solid #764ba2;
+            outline: none;
+        }
+        select {
+            width: 90%;
+            padding: 0.6rem;
+            border-radius: 8px;
+            border: 1px solid #bdbdbd;
+            font-size: 1rem;
+            margin: 0.5rem 0 1.2rem 0;
+            background: #f3f0ff;
+            color: #5a189a;
+        }
+        input[type="submit"] {
+            background: linear-gradient(90deg, #5f72bd 0%, #9a5af7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2.2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 1rem;
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .result {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #e0c3fc;
+            border-radius: 10px;
+            color: #4b006e;
+            font-size: 1.3rem;
+            box-shadow: 0 2px 8px rgba(120, 80, 180, 0.08);
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
 </head>
 <body>
-    <h2>Simple Calculator</h2>
-    <form method="post">
-        {% csrf_token %}
-        <input type="number" name="num1" required step="any" placeholder="Enter number 1"><br><br>
-        <input type="number" name="num2" required step="any" placeholder="Enter number 2"><br><br>
-
-        <select name="operation">
-            <option value="add">Add</option>
-            <option value="subtract">Subtract</option>
-            <option value="multiply">Multiply</option>
-            <option value="divide">Divide</option>
-        </select><br><br>
-
-        <input type="submit" value="Calculate">
-    </form>
-
-    {% if result != "" %}
-        <h3>Result: {{ result }}</h3>
-    {% endif %}
+    <div class="calculator-container">
+        <h2>Simple Calculator</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="number" name="num1" required step="any" placeholder="Enter number 1"><br>
+            <input type="number" name="num2" required step="any" placeholder="Enter number 2"><br>
+            <select name="operation">
+                <option value="add">Add (+)</option>
+                <option value="subtract">Subtract (−)</option>
+                <option value="multiply">Multiply (×)</option>
+                <option value="divide">Divide (÷)</option>
+            </select><br>
+            <input type="submit" value="Calculate">
+        </form>
+        {% if result != "" %}
+            <div class="result">
+                <strong>Result:</strong> {{ result }}
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
